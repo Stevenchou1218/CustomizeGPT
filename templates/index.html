@@ -28,6 +28,37 @@
             const chatContainer = document.getElementById('chatContainer');
             const messageInput = document.getElementById('messageInput');
             const sendButton = document.getElementById('sendButton');
+
+            messageInput.addEventListener('input', () => {
+                this.style.height = 'auto';
+                this.style.height = Math.min(this.scrollHeight) + 'px';
+            });
+
+            messageInput.addEventListener('keydown', (event) => {
+                if (event.key === 'Enter' && !event.shiftKey) {
+                    event.preventDefault();
+                    sendMessage();
+                }
+            });
+
+            sendButton.addEventListener('click', () => {
+                sendMessage();
+            });
+
+            function sendMessage() {
+                // 取出使用者輸入的訊息
+                const message = messageInput.value.trim();
+
+                if (message === '') 
+                    return;
+
+                // 移除空的狀態框
+                const emptyState = chatContainer.querySelector('.empty-state');
+                if (emptyState) {
+                    emptyState.remove();
+                }
+            }
+
         </script>
     </body>
 </html>
