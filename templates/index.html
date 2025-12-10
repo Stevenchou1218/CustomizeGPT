@@ -6,8 +6,9 @@
         <div class="header">
             <h1>CustomizeGPT</h1>
         </div>
-<!-- 注意,同一個名稱的ID只能有一個 -->
+        <!-- 注意,同一個名稱的ID只能有一個 -->
         <div class="chat-container" id="chatContainer">
+            <!-- 空的狀態框 -->
             <div class="empty-state">
                 <h2>歡迎使用CustomizeGPT!</h2>
                 <p>請在下方輸入訊息開始對話。</p>
@@ -45,6 +46,27 @@
                 sendMessage();
             });
 
+            // 新增訊息到聊天容器
+            function addMessage(text, role) {
+                const messageDiv = document.createElement('div');
+                messageDiv.className = `message ${role}`;
+
+                const avatar = document.createElement('div');
+                avatar.className = `avatar ${role}`;
+                avatar.textContent = role === 'user' ? 'U' : 'AI';
+
+                const content = document.createElement('div');
+                content.className = 'message-content';
+                content.textContent = text;
+
+                messageDiv.appendChild(avatar);
+                messageDiv.appendChild(content);
+                chatContainer.appendChild(messageDiv);
+
+                // 自動滾動到底部
+                chatContainer.scrollTop = chatContainer.scrollHeight;
+            }
+
             function sendMessage() {
                 // 取出使用者輸入的訊息
                 const message = messageInput.value.trim();
@@ -57,6 +79,18 @@
                 if (emptyState) {
                     emptyState.remove();
                 }
+
+                // 建立使用者訊息的元素
+                addMessage(message, 'user');
+
+                // 清空輸入框
+                messageInput.value = '';
+                messageInput.style.height = 'auto';
+
+                // 模擬AI回覆
+                setTimeout(() => {
+                    addMessage('你好,現在我還沒上線,請你等我有上線的時候再來跟我聊天喔~!!' + message, 'ai');
+                }, 1000);
             }
 
         </script>
