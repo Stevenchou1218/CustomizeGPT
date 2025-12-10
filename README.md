@@ -1,19 +1,19 @@
 # 安裝flask
 
 1. 安裝虛擬環境
-
+```
 python -m venv .venv
-
+```
 2. 重開terminal 看到有切到venv,再開始操作
 
 如果沒有,可以直接執行
-
+```
 .venv\Scripts\activate
-
+```
 3. 安裝flask 套件
-
+```
 pip install flask
-
+```
 # 網頁,js的控制
 
 1. app.py
